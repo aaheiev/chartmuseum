@@ -1,0 +1,21 @@
+---
+version:        '3.8'
+
+services:
+
+  chartmuseum:
+    image:      ghcr.io/helm/chartmuseum:v0.13.1
+    environment:
+      DEBUG:    1
+      STORAGE:  local
+      STORAGE_LOCAL_ROOTDIR: /charts
+    volumes:
+      - ./.data/charts:/charts:rw
+    ports:
+      - 8080:8080
+    healthcheck:
+      test:     [ "CMD", "curl", "-f", "http://127.0.0.1:8080/health" ]
+      interval: 5s
+      timeout:  5s
+      retries:  5
+    restart:    unless-stopped
