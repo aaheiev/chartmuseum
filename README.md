@@ -39,7 +39,7 @@ helm upgrade --install \
   --namespace=${k8sNamespace} \
   --create-namespace \
   --wait \
-  -f vars/ngs-autosubscribe-worker-apps/${targetAppEnv}.yaml \
+  -f vars/${targetAppEnv}.yaml \
   --set image.tag=${dockerImageTag} \
   ${releaseName} chartmuseum-dev/demo1
 ```
